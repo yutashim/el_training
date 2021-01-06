@@ -1,6 +1,6 @@
 <h2>タスク一覧</h2>
 <% @tasks.each do |task| %>
-  <p>task_name: <%= task.name %></p>
+  <p>task_title: <%= task.title %></p>
   <p>task_detail: <%= task.detail %></p>
   <div>
     <%= link_to '詳細', task_path(task.id) %>
