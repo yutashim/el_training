@@ -5,11 +5,11 @@
 <% end %>
 <%= form_with(model: @task, local: true) do |form| %>
   <p>
-    title:
+    <%= form.label :title %>
     <%= form.text_field :title %>
   </p>
   <p>
-    detail:
+    <%= form.label :detail %>
     <%= form.text_field :detail %>
   </p>
   <%= form.submit %>
