@@ -11,8 +11,9 @@ describe 'タスクモデル機能', type: :model do
     context 'タスクの詳細が空の場合' do
       it 'バリデーションにひっかかる' do
         task = Task.new(title: '失敗テスト', detail: '')
-        task.valid?
-        expect(task.errors[:detail]).to include("can't be blank")
+        # task.valid?
+        # expect(task.errors[:detail]).to include("can't be blank")
+        expect(task).not_to be_valid
       end
     end
 

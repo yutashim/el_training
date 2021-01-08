@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: 'DESC')
   end
 
   def show
@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       flash[:notice] = 'タスクを作成しました'
-      redirect_to tasks_path
+      redirect_to task_path(@task.id)
     else
       render :new
     end
