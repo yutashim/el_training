@@ -1,0 +1,13 @@
+<h2>タスク一覧</h2>
+<% @tasks.each do |task| %>
+  <div class="task">
+    <p>task_title: <%= task.title %></p>
+    <p>task_detail: <%= task.detail %></p>
+    <p>
+      <%= link_to '詳細', task_path(task.id) %>
+      <%= link_to '編集', edit_task_path(task.id) %>
+      <%= link_to '削除', task_path(task.id), method: :delete %>
+    </p>
+    <%= "_"*40 %>
+  </div>
+<% end %>

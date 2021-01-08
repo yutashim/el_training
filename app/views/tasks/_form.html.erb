@@ -1,0 +1,16 @@
+<% if @task.errors.any? %>
+  <% @task.errors.full_messages.each do |msg| %>
+    <h4 style="color: red;"><%= msg %></h4>
+  <% end %>
+<% end %>
+<%= form_with(model: @task, local: true) do |form| %>
+  <p>
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :detail %>
+    <%= form.text_field :detail %>
+  </p>
+  <%= form.submit %>
+<% end %>
