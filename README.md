@@ -41,3 +41,8 @@
 - Heroku buildpackの追加
 
   `$ heroku buildpacks:set heroku/ruby`
+  
+ - Herokuへpushする
+
+  `$ git push heroku master`
+
