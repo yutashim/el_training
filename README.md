@@ -41,7 +41,11 @@
 - Heroku buildpackの追加
 
   `$ heroku buildpacks:set heroku/ruby`
-  
+
 - Herokuへpushする
- 
+
   `$ git push heroku master`
+
+  - Herokuのデータベースを更新する
+
+    `$ heroku run rails db:migrate`
