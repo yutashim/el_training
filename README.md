@@ -41,9 +41,7 @@
 - Heroku buildpackの追加
 
   `$ heroku buildpacks:set heroku/ruby`
-
-  `$ heroku buildpacks:add --index 1 heroku/nodejs`
-
+  
 - Herokuへpushする
-
+ 
   `$ git push heroku master`
