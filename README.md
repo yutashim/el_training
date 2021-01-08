@@ -46,6 +46,6 @@
 
   `$ git push heroku master`
 
-  - Herokuのデータベースを更新する
+- Herokuのデータベースを更新する
 
-    `$ heroku run rails db:migrate`
+  `$ heroku run rails db:migrate`
