@@ -1,5 +1,8 @@
-<p>task_title: <%= @task.title %></p>
-<p>task_detail: <%= @task.detail %></p>
+<div class="shown_task">
+  <p><%= @task.title %></p>
+  <p><%= @task.detail %></p>
+  <p><%= @task.created_at %></p>
+</div>
 <div>
   <%= link_to '詳細', task_path(@task.id) %>
   <%= link_to '編集', edit_task_path(@task.id) %>
