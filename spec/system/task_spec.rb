@@ -47,6 +47,10 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit tasks_path
       expect(all('.task')[0].text).to have_content 'new_title'
     end
+    it '最初に作成したタスクが一番下に表示される' do
+      visit tasks_path
+      expect(all('.task')[-1].text).to have_content 'task_1'
+    end
   end
 
 end
