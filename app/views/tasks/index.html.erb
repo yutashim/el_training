@@ -3,7 +3,8 @@
   <div class="task">
     <p>task: <%= task.title %></p>
     <p>detail: <%= task.detail %></p>
-    <p>作成日時: <%= task.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+    <p>作成日時: <%= task.created_at.strftime("%Y-%m-%d %H:%M") %></p>
+    <p>終了期限: <%= task.deadline.strftime("%Y-%m-%d %H:%M") %></p>
 
     <p>
       <%= link_to '詳細', task_path(task.id) %>

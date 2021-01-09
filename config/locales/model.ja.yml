@@ -6,3 +6,4 @@ ja:
       task:
         title: タスクの名前
         detail: タスクの詳細
+        deadline: 終了期限
