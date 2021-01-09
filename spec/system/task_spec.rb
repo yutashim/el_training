@@ -58,7 +58,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(tasks[0].text).to have_content 'task_2'
       expect(tasks[-1].text).to have_content 'task_1'
     end
-    it '終了期限を作成日時から3日後に設定したタスクが上から2番目に表示される' do
+    it '新規作成したタスクが上から2番目に表示される' do
       time = Time.new(2021,01,15,00,00)
       visit new_task_path
       fill_in 'タスクの名前', with: '新しいタスク'
