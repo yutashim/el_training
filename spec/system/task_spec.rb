@@ -1,13 +1,9 @@
-# テスト項目
-# タスクを新規作成したとき、作成したタスクが画面に表示される
-# 一覧画面では、作成済みのタスクが表示される
-# 任意のタスク詳細画面に遷移したとき、該当タスクの内容が表示される
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task, title: 'task_1')
-    FactoryBot.create(:task, title: 'task_2')
-    FactoryBot.create(:task, title: 'task_3')
+    FactoryBot.create(:task, title: 'task_1', deadline: Time.now + 1.month)
+    FactoryBot.create(:task, title: 'task_2', deadline: Time.now + 1.day)
+    FactoryBot.create(:task, title: 'task_3', deadline: Time.now + 1.week)
   end
 
   describe '新規作成機能' do
@@ -50,6 +46,29 @@ RSpec.describe 'タスク管理機能', type: :system do
     it '最初に作成したタスクが一番下に表示される' do
       visit tasks_path
       expect(all('.task')[-1].text).to have_content 'task_1'
+    end
+  end
+
+  describe 'タスクが終了期限で昇順に並んでいる場合' do
+    it '上からtask_2, task_3, task_1の順で表示される' do
+      visit tasks_path
+      click_on '終了期限でソートする'
+      tasks = all('.task')
+      expect(tasks[0].text).to have_content 'task_2'
+      expect(tasks[-1].text).to have_content 'task_1'
+    end
+    it '終了期限を作成日時から3日後に設定したタスクが上から2番目に表示される' do
+      time = Time.now + 3.day
+      visit new_task_path
+      fill_in 'タスクの名前', with: '新しいタスク'
+      fill_in 'タスクの詳細', with: '上から2番目に来る'
+      select time.strftime("%Y"), from: 'task_deadline_1i'
+      select time.strftime("%m"), from: 'task_deadline_2i'
+      select time.strftime("%d"), from: 'task_deadline_3i'
+      click_on '登録する'
+      visit tasks_path
+      click_on '終了期限でソートする'
+      expect(all('.task')[1].text).to have_content '上から2番目に来る'
     end
   end
 
