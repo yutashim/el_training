@@ -1,19 +1,19 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task, title: 'task_1', deadline: Time.now + 1.month)
-    FactoryBot.create(:task, title: 'task_2', deadline: Time.now + 1.day)
-    FactoryBot.create(:task, title: 'task_3', deadline: Time.now + 1.week)
+    FactoryBot.create(:task, title: 'task_1', deadline: Time.new(2021,02,10,00,00))
+    FactoryBot.create(:task, title: 'task_2', deadline: Time.new(2021,01,10,00,00))
+    FactoryBot.create(:task, title: 'task_3', deadline: Time.new(2021,01,20,00,00))
   end
 
   describe '新規作成機能' do
     context 'タスクを新規作成した場合' do
       it '作成したタスクが表示される' do
-      visit new_task_path
-      fill_in 'タスクの名前', with: 'test_title'
-      fill_in 'タスクの詳細', with: 'test_detail'
-      click_on '登録する'
-      expect(page).to have_content 'test_title'
+        visit new_task_path
+        fill_in 'タスクの名前', with: 'test_title'
+        fill_in 'タスクの詳細', with: 'test_detail'
+        click_on '登録する'
+        expect(page).to have_content 'test_title'
       end
     end
   end
@@ -54,11 +54,12 @@ RSpec.describe 'タスク管理機能', type: :system do
       visit tasks_path
       click_on '終了期限でソートする'
       tasks = all('.task')
+      p current_path
       expect(tasks[0].text).to have_content 'task_2'
       expect(tasks[-1].text).to have_content 'task_1'
     end
     it '終了期限を作成日時から3日後に設定したタスクが上から2番目に表示される' do
-      time = Time.now + 3.day
+      time = Time.new(2021,01,15,00,00)
       visit new_task_path
       fill_in 'タスクの名前', with: '新しいタスク'
       fill_in 'タスクの詳細', with: '上から2番目に来る'
@@ -67,9 +68,11 @@ RSpec.describe 'タスク管理機能', type: :system do
       select time.strftime("%d"), from: 'task_deadline_3i'
       click_on '登録する'
       visit tasks_path
-      click_on '終了期限でソートする'
-      expect(all('.task')[1].text).to have_content '上から2番目に来る'
+      click_link '終了期限でソートする'
+      click_link '終了期限でソートする'
+      new_task = all('.task')[1]
+      p current_path
+      expect(new_task.text).to have_content '上から2番目に来る'
     end
   end
-
 end
