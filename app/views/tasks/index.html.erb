@@ -1,5 +1,7 @@
 <%= form_with(scope: :search, local: true, url: tasks_path, method: :get) do |form| %>
   <%= form.text_field :word %>
+  <%= form.select :status, [['未着手', '未着手'], ['着手中', '着手中'], ['完了', '完了']],
+  include_blank: '選択してください'%>
   <%= form.submit '検索する' %>
 <% end %>
 <h2>タスク一覧</h2>
