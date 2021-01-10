@@ -16,5 +16,9 @@
     <%= form.label :deadline %>
     <%= form.datetime_select :deadline, use_two_digit_numbers: true %>
   </p>
+  <p>
+    <%= form.label :status %>
+    <%= form.select :status, [['未着手', '未着手'], ['着手中', '着手中'], ['完了', '完了']]%>
+  </p>
   <%= form.submit %>
 <% end %>

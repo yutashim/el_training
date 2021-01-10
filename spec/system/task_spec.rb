@@ -53,6 +53,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     it '上からtask_2, task_3, task_1の順で表示される' do
       visit tasks_path
       click_on '終了期限でソートする'
+      sleep(2)
       tasks = all('.task')
       p current_path
       expect(tasks[0].text).to have_content 'task_2'
@@ -69,7 +70,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       click_on '登録する'
       visit tasks_path
       click_link '終了期限でソートする'
-      click_link '終了期限でソートする'
+      sleep(2)
       new_task = all('.task')[1]
       p current_path
       expect(new_task.text).to have_content '上から2番目に来る'
