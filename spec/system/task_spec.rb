@@ -1,9 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
-    FactoryBot.create(:task, title: 'task_1', deadline: Time.new(2021,02,10,00,00))
-    FactoryBot.create(:task, title: 'task_2', deadline: Time.new(2021,01,10,00,00))
-    FactoryBot.create(:task, title: 'task_3', deadline: Time.new(2021,01,20,00,00))
+    FactoryBot.create(:task, title: 'task_1', deadline: Time.new + 1.month)
+    FactoryBot.create(:task, title: 'task_2', deadline: Time.new + 1.day)
+    FactoryBot.create(:task, title: 'task_3', deadline: Time.new + 1.week)
   end
 
   describe '新規作成機能' do
@@ -12,8 +12,10 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'タスクの名前', with: 'test_title'
         fill_in 'タスクの詳細', with: 'test_detail'
+        select '着手中', from: 'task_status'
         click_on '登録する'
         expect(page).to have_content 'test_title'
+        expect(page).to have_content '着手中'
       end
     end
   end
@@ -60,7 +62,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       expect(tasks[-1].text).to have_content 'task_1'
     end
     it '新規作成したタスクが上から2番目に表示される' do
-      time = Time.new(2021,01,15,00,00)
+      time = Time.new + 3.day
       visit new_task_path
       fill_in 'タスクの名前', with: '新しいタスク'
       fill_in 'タスクの詳細', with: '上から2番目に来る'
