@@ -1,6 +1,7 @@
 class Task < ApplicationRecord
   validates :title, presence: true
   validates :detail, presence: true, length: {maximum: 255 }
+  enum priority: [:high, :middle, :low]
 
   scope :search_tasks, ->(pr) {
     if pr[:word].present? && pr[:status].present?
