@@ -4,12 +4,24 @@ class Task < ApplicationRecord
 
   scope :search_tasks, ->(pr) {
     if pr[:word].present? && pr[:status].present?
-      tasks = Task.where("title LIKE ?", "%#{pr[:word]}%")
-      @tasks = tasks.where(status: pr[:status])
+      title_status_search(pr[:word], pr[:status])
     elsif pr[:word].present?
-      @tasks = Task.where("title LIKE ?", "%#{pr[:word]}%")
+      title_search(pr[:word])
     elsif pr[:status].present?
-      @tasks = Task.where(status: pr[:status])
+      status_search(pr[:status])
     end
+  }
+
+  scope :title_status_search, ->(wd, st) {
+    tasks = Task.where("title LIKE ?", "%#{wd}%")
+    @tasks = tasks.where(status: st)
+  }
+
+  scope :title_search, ->(wd) {
+    @tasks = Task.where("title LIKE ?", "%#{wd}%")
+  }
+
+  scope :status_search, ->(st) {
+    @tasks = Task.where(status: st)
   }
 end
