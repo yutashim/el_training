@@ -11,7 +11,7 @@
 <% @tasks.each do |task| %>
   <div class="task">
     <p>task: <%= task.title %></p>
-    <p>detail: <%= task.detail %></p>
+    <p>detail: <%= task.slice_detail %></p>
     <p>ステータス: <%= task.status %></p>
     <p>
       優先度:

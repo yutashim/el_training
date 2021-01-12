@@ -25,4 +25,19 @@ class Task < ApplicationRecord
   scope :status_search, ->(st) {
     @tasks = Task.where(status: st)
   }
+
+  def slice_detail
+    if detail.size <= 6
+      detail
+    else
+      "#{detail.slice(0..5)}..."
+    end
+  end
+  # def slice_detail
+  #   if self.detail.size <= 6
+  #     self.detail
+  #   else
+  #     "#{self.detail.slice(0..5)}..."
+  #   end
+  # end
 end
