@@ -1,6 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク管理機能', type: :system do
   before do
+    DatabaseCleaner.clean
     FactoryBot.create(:task, title: 'task_1', deadline: Time.new + 1.month)
     FactoryBot.create(:task, title: 'task_2', deadline: Time.new + 1.day)
     FactoryBot.create(:task, title: 'task_3', deadline: Time.new + 1.week)
@@ -55,7 +56,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     it '上からtask_2, task_3, task_1の順で表示される' do
       visit tasks_path
       click_on '終了期限でソートする'
-      sleep(2)
+      sleep(0.5)
       tasks = all('.task')
       p current_path
       expect(tasks[0].text).to have_content 'task_2'
@@ -71,11 +72,9 @@ RSpec.describe 'タスク管理機能', type: :system do
       select time.strftime("%d"), from: 'task_deadline_3i'
       click_on '登録する'
       visit tasks_path
-      click_link '終了期限でソートする'
-      sleep(2)
-      new_task = all('.task')[1]
-      p current_path
-      expect(new_task.text).to have_content '上から2番目に来る'
+      sleep(1)
+      click_on '終了期限でソートする'
+      expect(all('.task')[1].text).to have_content '上から2番'
     end
   end
 end
