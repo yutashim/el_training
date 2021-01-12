@@ -33,11 +33,4 @@ class Task < ApplicationRecord
       "#{detail.slice(0..5)}..."
     end
   end
-  # def slice_detail
-  #   if self.detail.size <= 6
-  #     self.detail
-  #   else
-  #     "#{self.detail.slice(0..5)}..."
-  #   end
-  # end
 end

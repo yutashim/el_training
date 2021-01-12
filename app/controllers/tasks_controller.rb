@@ -1,13 +1,14 @@
 class TasksController < ApplicationController
+  PER = 6
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   def index
-    @tasks = Task.all.order(created_at: 'DESC')
+    @tasks = Task.order(created_at: 'DESC').page(params[:page]).per(PER)
     if params[:sort_expired]
-      @tasks = Task.all.order(deadline: 'ASC')
+      @tasks = Task.order(deadline: 'ASC').page(params[:page]).per(PER)
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: 'ASC')
+      @tasks = Task.order(priority: 'ASC').page(params[:page]).per(PER)
     elsif params[:search]
-      @tasks = Task.search_tasks(params[:search])
+      @tasks = Task.search_tasks(params[:search]).page(params[:page]).per(PER)
     end
   end
 
@@ -30,7 +31,7 @@ class TasksController < ApplicationController
 
   def edit
   end
-  
+
   def update
     if @task.update(task_params)
       redirect_to tasks_path
