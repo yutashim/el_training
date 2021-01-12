@@ -8,3 +8,9 @@ ja:
         detail: タスクの詳細
         deadline: 終了期限
         priority: 優先度
+    enum:
+      task:
+        priority:
+          high: 高
+          middle: 中
+          low: 低
