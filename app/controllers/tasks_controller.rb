@@ -30,7 +30,7 @@ class TasksController < ApplicationController
 
   def edit
   end
-
+  
   def update
     if @task.update(task_params)
       redirect_to tasks_path
