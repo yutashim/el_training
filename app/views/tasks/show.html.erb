@@ -1,11 +1,19 @@
-<div class="shown_task">
-  <p><%= @task.title %></p>
-  <p><%= @task.detail %></p>
-  <p><%= @task.created_at %></p>
+<div class="jumbotron mx-auto" style="width: 90%;  margin-top: 60px;">
+  <p class="display-4"><%= @task.title %></p>
+  <p class="lead"><%= @task.detail %></p>
+  <hr class="my-4">
+  <p>
+    ステータス: <%= @task.status %>
+  </p>
+  <p>
+    優先度: <%= t("activerecord.enum.task.priority.#{@task.priority}")%>
+  </p>
+  <p>作成日時: <%= @task.created_at.strftime("%c") %></p>
+  <p>終了期限: <%= @task.deadline.strftime("%c") %></p>
+  <hr class="my-4">
+  <div>
+    <%= link_to '詳細', task_path(@task.id) %>
+    <%= link_to '編集', edit_task_path(@task.id) %>
+    <%= link_to '削除', task_path(@task.id), method: :delete %>
+  </div>
 </div>
-<div>
-  <%= link_to '詳細', task_path(@task.id) %>
-  <%= link_to '編集', edit_task_path(@task.id) %>
-  <%= link_to '削除', task_path(@task.id), method: :delete %>
-</div>
-<%= "_"*40 %>

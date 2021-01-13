@@ -10,7 +10,10 @@
   </head>
 
   <body>
-    <h4 style="color: green;"><%= flash[:notice] %></h4>
+    <%= render 'layouts/header' %>
+    <% if flash[:notice] %>
+      <h4 class="alert alert-info"><%= flash[:notice] %></h4>
+    <% end %>
     <%= yield %>
   </body>
 </html>
