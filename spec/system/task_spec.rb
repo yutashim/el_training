@@ -55,7 +55,7 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe 'タスクが終了期限で昇順に並んでいる場合' do
     it '上からtask_2, task_3, task_1の順で表示される' do
       visit tasks_path
-      click_on '終了期限でソートする'
+      click_on '終了期限'
       sleep(0.5)
       tasks = all('.task')
       p current_path
@@ -73,7 +73,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       click_on '登録する'
       visit tasks_path
       sleep(1)
-      click_on '終了期限でソートする'
+      click_on '終了期限'
       expect(all('.task')[1].text).to have_content '上から2番'
     end
   end

@@ -55,7 +55,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     it '優先度が高い順にソートされる' do
       FactoryBot.create(:task, title:'優先度：高', priority: 0)
       visit tasks_path
-      click_on '優先順位でソート'
+      click_on '優先順位'
       sleep(0.5)
       expect(all('.task')[0].text).to have_content '優先度：高'
       expect(all('.task')[-1].text).to have_content 'task'
