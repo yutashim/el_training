@@ -1,29 +1,35 @@
-<% if @task.errors.any? %>
-  <% @task.errors.full_messages.each do |msg| %>
-    <h4 style="color: red;"><%= msg %></h4>
-  <% end %>
-<% end %>
 <%= form_with(model: @task, local: true) do |form| %>
-  <p>
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </p>
-  <p>
-    <%= form.label :detail %>
-    <%= form.text_field :detail %>
-  </p>
-  <p>
-    <%= form.label :deadline %>
-    <%= form.datetime_select :deadline, use_two_digit_numbers: true %>
-  </p>
-  <p>
-    <%= form.label :status %>
-    <%= form.select :status, [['未着手', '未着手'], ['着手中', '着手中'], ['完了', '完了']]%>
-  </p>
-  <p>
-    <%= form.label :priority %>
-    <%= form.select :priority, [['高', 'high'], ['中', 'middle'], ['低', 'low']]%>
-  </p>
-
-  <%= form.submit %>
+  <div class="card mx-auto" style="width: 40rem; margin-top: 60px;">
+    <div class="card-body">
+      <h4 class="card-title">タスクを登録</h4>
+      <% if @task.errors.any? %>
+        <% @task.errors.full_messages.each do |msg| %>
+          <p class="alert alert-danger"><%= msg %></p>
+        <% end %>
+      <% end %>
+      <p class="card-text">
+        <%= form.label :title %><br>
+        <%= form.text_field :title, class:'ml-4' %>
+      </p>
+      <p class="card-text">
+        <%= form.label :detail %><br>
+        <%= form.text_field :detail, class:'ml-4' %>
+      </p>
+      <p class="card-text">
+        <%= form.label :deadline %>
+        <%= form.datetime_select :deadline, use_two_digit_numbers: true %>
+      </p>
+      <p class="card-text">
+        <%= form.label :status %>
+        <%= form.select :status, [['未着手', '未着手'], ['着手中', '着手中'], ['完了', '完了']]%>
+      </p>
+      <p class="card-text">
+        <%= form.label :priority %>
+        <%= form.select :priority, [['高', 'high'], ['中', 'middle'], ['低', 'low']]%>
+      </p>
+      <div class='card-text' style="text-align: center;">
+        <%= form.submit class: 'btn btn-primary'%>
+      </div>
+    </div>
+  </div>
 <% end %>
