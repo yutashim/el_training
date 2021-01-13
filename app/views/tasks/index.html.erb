@@ -14,7 +14,7 @@
       <th scope="col">タスク名</th>
       <th scope="col">詳しい内容</th>
       <th scope="col">
-        <%= link_to '終了期限', tasks_path(sort_expired: "true") %>
+        <%= link_to '終了期限', tasks_path(sort_expired: @order) %>
       </th>
       <th scope="col">
         登録日時
