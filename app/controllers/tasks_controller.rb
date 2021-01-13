@@ -5,13 +5,7 @@ class TasksController < ApplicationController
     @order = "ASC"
     @tasks = Task.order(created_at: 'DESC').page(params[:page]).per(PER)
     if params[:sort_expired]
-      if params[:sort_expired] == "ASC"
-        @tasks = Task.order(deadline: 'ASC').page(params[:page]).per(PER)
-        @order = "DESC"
-      else
-        @tasks = Task.order(deadline: 'DESC').page(params[:page]).per(PER)
-        @order = "ASC"
-      end
+      asc_desc_sort(PER)
     elsif params[:sort_priority]
       @tasks = Task.order(priority: 'ASC').page(params[:page]).per(PER)
     elsif params[:search]
