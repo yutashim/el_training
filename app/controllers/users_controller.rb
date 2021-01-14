@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+  before_action :users_logged_in?
   before_action :set_user, only: [:edit, :update, :show]
-  before_action :current_user
   before_action :edit_user?, only: [:edit, :show]
   def new
     redirect_to tasks_path if @current_user
@@ -42,14 +42,13 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
+  def users_logged_in?
+    # current_user
+    # redirect_to new_session_path unless @current_user
+    redirect_to new_session_path unless logged_in?
+  end
+
   def edit_user?
-    # if logged_in?
-    #   redirect_to new_user_path
-    # else
-    #   if @current_user != @user
-    #     redirect_to user_path(@current_user.id)
-    #   end
-    # end
     if !logged_in?
       redirect_to new_session_path
     elsif @current_user != @user && @current_user.id != 7

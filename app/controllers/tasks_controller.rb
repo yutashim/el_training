@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   PER = 6
-  before_action :permit_tasks_page?
+  before_action :tasks_logged_in?
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :edit_task?, only: [:show, :edit, :update, :destroy]
   def index
@@ -60,14 +60,17 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :detail, :deadline, :status, :priority)
   end
 
-  def permit_tasks_page?
-    current_user
-    redirect_to new_session_path unless @current_user
+  def tasks_logged_in?
+    # current_user
+    # redirect_to new_session_path unless @current_user
+    redirect_to new_session_path unless logged_in?
   end
 
   def edit_task?
-    unless @task.user_id == @current_user.id
+    if @task.user_id != @current_user.id
       redirect_to tasks_path
+    elsif @current_user.id != 7
+      redirect_to user_path(@current_user.id)
     end
   end
 end
