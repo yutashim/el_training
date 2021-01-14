@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
   before_action :current_user
-  before_action :edit_user?, only: [:edit, :update, :show]
+  before_action :edit_user?, only: [:edit, :show]
   def new
     redirect_to tasks_path if @current_user
     @user = User.new
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       flash[:notice] = "#{@user.name}さん、はじめまして！"
+      session[:user_id] = @user.id
       redirect_to user_path(@user.id)
     else
       render :new
@@ -42,10 +43,6 @@ class UsersController < ApplicationController
   end
 
   def edit_user?
-    # redirect_to new_user_path unless logged_in?
-    # unless @current_user == @user
-    #   redirect_to user_path(@current_user.id)
-    # end
     unless logged_in?
       redirect_to new_user_path
     else
