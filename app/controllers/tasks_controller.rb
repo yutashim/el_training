@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
   PER = 6
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :current_user
   def index
+    redirect_to new_user_path unless @current_user
     @order = "ASC"
     @tasks = Task.order(created_at: 'DESC')
     if params[:sort_expired]

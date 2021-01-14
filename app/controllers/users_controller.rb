@@ -1,6 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
+  before_action :current_user
   def new
+    redirect_to tasks_path if @current_user
     @user = User.new
   end
 
@@ -10,7 +12,7 @@ class UsersController < ApplicationController
       flash[:notice] = "#{@user.name}さん、はじめまして！"
       redirect_to user_path(@user.id)
     else
-      render new
+      render :new
     end
   end
 
