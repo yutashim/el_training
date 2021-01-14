@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :current_user
   def index
-    redirect_to new_user_path unless @current_user
+    redirect_to new_session_path unless @current_user
     @order = "ASC"
     @tasks = Task.order(created_at: 'DESC')
     if params[:sort_expired]
