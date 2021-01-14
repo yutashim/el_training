@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :show]
   before_action :current_user
+  before_action :edit_user?, only: [:edit, :update, :show]
   def new
     redirect_to tasks_path if @current_user
     @user = User.new
@@ -38,5 +39,19 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def edit_user?
+    # redirect_to new_user_path unless logged_in?
+    # unless @current_user == @user
+    #   redirect_to user_path(@current_user.id)
+    # end
+    unless logged_in?
+      redirect_to new_user_path
+    else
+      if @current_user != @user
+        redirect_to user_path(@current_user.id)
+      end
+    end
   end
 end
