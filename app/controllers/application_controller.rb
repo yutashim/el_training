@@ -9,3 +9,7 @@ class ApplicationController < ActionController::Base
     end
   end
 end
+
+
+# sym = :priority
+# Task.order(sym => 'ASC')
