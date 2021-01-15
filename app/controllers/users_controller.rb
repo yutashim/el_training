@@ -2,8 +2,11 @@ class UsersController < ApplicationController
   before_action :users_logged_in?
   before_action :set_user, only: [:edit, :update, :show]
   before_action :edit_user?, only: [:edit, :show]
+
   def new
-    redirect_to tasks_path if @current_user
+    if @current_user.admin != true
+      redirect_to tasks_path
+    end
     @user = User.new
   end
 
