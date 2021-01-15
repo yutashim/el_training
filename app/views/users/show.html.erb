@@ -1,2 +1,41 @@
 <h1><%= @user.name%>のプロフィール</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<table class="table container my-3 mx-4">
+  <thead>
+    <tr>
+      <th scope="col">タスク名</th>
+      <th scope="col">詳しい内容</th>
+      <th scope="col">
+        <%= link_to '終了期限', tasks_path(sort_expired: @order) %>
+      </th>
+      <th scope="col">
+        登録日時
+      </th>
+      <th scope="col">
+        ステータス
+      </th>
+      <th scope="col">
+        <%= link_to '優先順位', tasks_path(sort_priority: "true")%>
+      </th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+    <tr class='task'>
+      <th scope="row"><%= task.title %></th>
+      <td><%= task.slice_detail %></td>
+      <td><%= task.deadline.strftime("%Y-%m-%d-%H:%M") %></td>
+      <td><%= task.created_at.strftime("%Y-%m-%d") %></td>
+      <td><%= task.status %></td>
+      <td>
+        <%= t("activerecord.enum.task.priority.#{task.priority}")%>
+      </td>
+      <td>
+        <%= link_to '詳細', task_path(task.id), class: 'btn btn-primary' %>
+        <%= link_to '編集', edit_task_path(task.id), class: 'btn btn-success' %>
+        <%= link_to '削除', task_path(task.id), method: :delete, class: 'btn btn-danger' %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

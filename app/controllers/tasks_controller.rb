@@ -67,10 +67,13 @@ class TasksController < ApplicationController
   end
 
   def edit_task?
-    if @task.user_id != @current_user.id
-      redirect_to tasks_path
-    elsif @current_user.id != 7
-      redirect_to user_path(@current_user.id)
+    # unless @current_user == @task.user
+    #   unless @current_user.id == 7
+    #     redirect_to user_path(@current_user)
+    #   end
+    # end
+    if @current_user != @task.user && @current_user.id != 7
+      redirect_to user_path(@current_user)
     end
   end
 end
