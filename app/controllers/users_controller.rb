@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :users_logged_in?, except: [:new, :create]
-  before_action :set_user, only: [:edit, :update, :show]
+  before_action :users_logged_in?, except: [:new, :create,]
+  before_action :set_user, only: [:edit, :update, :show, :destroy]
   before_action :edit_user?, only: [:edit, :show]
 
   def new
@@ -35,6 +35,12 @@ class UsersController < ApplicationController
 
   def show
     @tasks = @user.tasks
+  end
+
+  def destroy
+    @user.destroy
+    flash[:notice] = 'ユーザを削除しました'
+    redirect_to admin_users_path
   end
 
   private
