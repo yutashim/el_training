@@ -72,7 +72,7 @@ class TasksController < ApplicationController
     #     redirect_to user_path(@current_user)
     #   end
     # end
-    if @current_user != @task.user && @current_user.id != 7
+    if @current_user != @task.user && @current_user.admin != true
       redirect_to user_path(@current_user)
     end
   end

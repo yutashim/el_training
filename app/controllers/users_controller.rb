@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :users_logged_in?
+  before_action :users_logged_in?, except: [:new]
   before_action :set_user, only: [:edit, :update, :show]
   before_action :edit_user?, only: [:edit, :show]
 
   def new
-    if @current_user.admin != true
+    if @current_user && @current_user.admin != false
       redirect_to tasks_path
     end
     @user = User.new
@@ -47,16 +47,13 @@ class UsersController < ApplicationController
   end
 
   def users_logged_in?
-    # current_user
-    # redirect_to new_session_path unless @current_user
     redirect_to new_session_path unless logged_in?
   end
 
   def edit_user?
-    if !logged_in?
-      redirect_to new_session_path
-    elsif @current_user != @user && @current_user.id != 7
-      redirect_to user_path(@current_user.id)
+    if @current_user != @user && @current_user.admin != true
+      # redirect_to user_path(@current_user.id)
+      redirect_to tasks_path
     end
   end
 end
