@@ -3,6 +3,7 @@ FactoryBot.define do
     title {'test_title'}
     detail {'test_detail'}
     status {'未着手'}
+    user
   end
 
   # （存在しないクラス名の名前をつける場合、オプションで「このクラスのテストデータにしてください」と指定します）

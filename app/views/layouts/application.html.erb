@@ -15,7 +15,6 @@
       <% if flash[:notice] %>
         <h4 class="alert alert-info"><%= flash[:notice] %></h4>
       <% end %>
-      <%= User.find_by(admin: true).email %>
       <%= yield %>
     </div>
   </body>
