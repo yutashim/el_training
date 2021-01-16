@@ -14,7 +14,7 @@ class Admin::UsersController < ApplicationController
   def show
     @user.update(admin: false)
     if @user.errors.any?
-      flash[:notice] = '管理者ユーザがいなくなってしまいます'
+      flash[:danger] = '管理者ユーザがいなくなってしまいます'
     end
     redirect_to admin_users_path
   end
@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
         redirect_to new_session_path
     else
       if @current_user.admin != true
-        flash[:notice] = 'アクセス権限がありません'
+        flash[:danger] = 'アクセス権限がありません'
         redirect_to user_path(@current_user.id)
       end
     end

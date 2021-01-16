@@ -40,7 +40,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     if @user.errors.any?
-      flash[:notice] = '管理者ユーザがいなくなってしまいます'
+      flash[:danger] = '管理者ユーザがいなくなってしまいます'
     else
       flash[:notice] = 'ユーザを削除しました'
     end
