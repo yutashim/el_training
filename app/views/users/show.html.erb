@@ -1,4 +1,8 @@
-<h1><%= @user.name%>のプロフィール</h1>
+<h3 class='ml-4'><%= @current_user.name  %>のタスク一覧</h3>
+<div class="profile m-4">
+  名前: <%= @current_user.name %><br>
+  メールアドレス: <%= @current_user.email %>
+</div>
 <table class="table container my-3 mx-4">
   <thead>
     <tr>

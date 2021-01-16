@@ -1,4 +1,4 @@
-<h3 class='ml-4'>***のタスク一覧</h3>
+<h3 class='ml-4'><%= @current_user.name  %>のタスク一覧</h3>
 <%= form_with(scope: :search, local: true, url: tasks_path, method: :get) do |form| %>
   <%= form.label :word, 'タスク名:', class:'ml-5' %>
   <%= form.text_field :word %>
