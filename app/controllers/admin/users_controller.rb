@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :admin_user?
-  before_action :set_user, only: [:edit, :destroy ]
+  before_action :set_user, only: [:edit, :show ]
   def index
     # @users = User.all
     @users = User.includes(:tasks)
@@ -11,8 +11,11 @@ class Admin::UsersController < ApplicationController
     redirect_to admin_users_path
   end
 
-  def destroy
+  def show
     @user.update(admin: false)
+    if @user.errors.any?
+      flash[:notice] = '管理者ユーザがいなくなってしまいます'
+    end
     redirect_to admin_users_path
   end
 

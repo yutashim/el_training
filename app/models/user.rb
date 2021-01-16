@@ -1,22 +1,16 @@
 class User < ApplicationRecord
+  before_update :ensure_admin
+  before_destroy :ensure_admin
   has_many :tasks, dependent: :destroy
   has_secure_password
-  after_destroy :maintain_admin_user
-  after_update :maintain_admin_user
   private
-  def maintain_admin_user
-    if User.find_by(admin: true) == nil
-      loop {
-        email = SecureRandom.alphanumeric(6)
-        user = User.new(
-          name: 'admin_user',
-          email: "#{email}@email.com",
-          password: 'password',
-          password_confirmation: 'password',
-          admin: true
-        )
-        break if user.save
-      }
+  def ensure_admin
+    if User.where(admin: true).size == 0
+      errors.add(:base, "don't edit")
+      throw(:abort)
+    elsif User.where(admin: true).size == 1
+      errors.add(:base, "don't destoy")
+      throw(:abort)
     end
   end
 end
