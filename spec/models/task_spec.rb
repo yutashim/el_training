@@ -1,5 +1,9 @@
 require 'rails_helper'
-describe 'タスクモデル機能', type: :model do
+RSpec.describe 'タスクモデル機能', type: :model do
+  before do
+    DatabaseCleaner.clean
+    FactoryBot.create(:user)
+  end
   describe 'バリデーションのテスト' do
     context 'タスクのタイトルが空の場合' do
       it 'バリデーションにひっかる' do

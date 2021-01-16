@@ -1,5 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'タスクモデル機能', type: :model do
+  before do
+    DatabaseCleaner.clean
+    FactoryBot.create(:user)
+  end
   describe '検索機能' do
     # 必要に応じて、テストデータの内容を変更して構わない
     let!(:task) { FactoryBot.create(:task, title: 'task') }

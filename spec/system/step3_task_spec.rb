@@ -3,16 +3,17 @@ RSpec.describe 'タスク管理機能', type: :system do
   before do
     DatabaseCleaner.clean
     # 必要に応じて、テストデータの内容を変更して構わない
+    FactoryBot.create(:user)
     FactoryBot.create(:task, title: "task", priority: 2 )
     FactoryBot.create(:second_task, title: "sample", status: "着手中")
   end
+  let!(:login) {
+    visit new_session_path
+    fill_in 'Email', with: 'user_a@email.com'
+    fill_in 'Password', with: 'password'
+    click_on 'login'
+  }
   describe '検索機能' do
-    before do
-      DatabaseCleaner.clean
-      # 必要に応じて、テストデータの内容を変更して構わない
-      FactoryBot.create(:task, title: "task", )
-      FactoryBot.create(:second_task, title: "sample", status: "着手中")
-    end
     context 'タイトルであいまい検索をした場合' do
       it "検索キーワードを含むタスクで絞り込まれる" do
         visit tasks_path
