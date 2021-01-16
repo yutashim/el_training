@@ -6,8 +6,8 @@ class UsersController < ApplicationController
   def new
     if logged_in? && @current_user.admin != true
       redirect_to user_path(@current_user.id)
-      @user = User.new
     end
+    @user = User.new
   end
 
   def create
