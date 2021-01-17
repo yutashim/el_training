@@ -12,8 +12,6 @@ class User < ApplicationRecord
     self.admin
   end
   def ensure_admin
-    p 'dst_adminの実行'
-    p 'dst_adminの実行'
     if User.where(admin: true).size == 1
       errors.add(:base, "don't edit/destoy")
       throw(:abort)
