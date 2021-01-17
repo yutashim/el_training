@@ -1,7 +1,12 @@
 User.create(
   name: 'admin_user',
-  email: 'admin@email.com',
+  email: 'ad@email.com',
   password: 'password',
-  password_digest: 'password',
+  password_confirmation: 'password',
   admin: true
 )
+
+# heroku run rails c で実行
+# Task.all.each do |task|
+#   task.update(user: User.first)
+# end
