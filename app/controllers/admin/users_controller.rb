@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show ]
   def index
     # @users = User.all
-    @users = User.includes(:tasks)
+    @users = User.includes(:tasks).order(admin: 'DESC')
   end
 
   def edit
