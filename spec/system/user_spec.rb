@@ -21,6 +21,7 @@ RSpec.describe 'ユーザ管理機能', type: :system do
   describe 'セッション機能のテスト' do
     before do
       @user = FactoryBot.create(:user)
+      @user_b = FactoryBot.create(:user, email: "user_b@email.com" )
     end
     let!(:login) {
       visit new_session_path
@@ -36,7 +37,6 @@ RSpec.describe 'ユーザ管理機能', type: :system do
       expect(page).to have_current_path user_path(@user.id)
     end
     it '一般ユーザが他人の詳細ページへ飛ぶと、タスク一覧ページに遷移する' do
-      @user_b = FactoryBot.create(:user, email: "user_b@email.com" )
       visit user_path(@user_b.id)
       expect(page).to have_current_path tasks_path
     end
