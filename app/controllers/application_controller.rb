@@ -1,11 +1,17 @@
 class ApplicationController < ActionController::Base
-  def asc_desc_sort
+  protect_from_forgery with: :exception
+  include SessionsHelper
+  def asc_desc_sort(tasks)
     if params[:sort_expired] == "ASC"
-      @tasks = Task.order(deadline: 'ASC')
+      @tasks = tasks.order(deadline: 'ASC')
       @order = "DESC"
     else
-      @tasks = Task.order(deadline: 'DESC')
+      @tasks = tasks.order(deadline: 'DESC')
       @order = "ASC"
     end
   end
 end
+
+
+# sym = :priority
+# Task.order(sym => 'ASC')

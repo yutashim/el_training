@@ -1,13 +1,8 @@
 <h3 class='ml-4'><%= @current_user.name  %>のタスク一覧</h3>
-<%= form_with(scope: :search, local: true, url: tasks_path, method: :get) do |form| %>
-  <%= form.label :word, 'タスク名:', class:'ml-5' %>
-  <%= form.text_field :word %>
-  <%= form.label :status, 'ステータス:', class:'ml-5'%>
-  <%= form.select :status, [['未着手', '未着手'], ['着手中', '着手中'], ['完了', '完了']],
-  include_blank: '選択してください'%>
-  <%= form.submit '検索する', class:'ml-3' %>
-<% end %>
-
+<div class="profile m-4">
+  名前: <%= @current_user.name %><br>
+  メールアドレス: <%= @current_user.email %>
+</div>
 <table class="table container my-3 mx-4">
   <thead>
     <tr>
@@ -48,5 +43,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= paginate @tasks%>
