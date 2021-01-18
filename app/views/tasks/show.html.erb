@@ -11,6 +11,13 @@
   <p>作成日時: <%= @task.created_at.strftime("%c") %></p>
   <p>終了期限: <%= @task.deadline.strftime("%c") %></p>
   <hr class="my-4">
+  <div class="labels">
+    <p>付いているラベル</p>
+    <% @task.labels.each do |l| %>
+      <p class='ml-2 p-2 badge badge-warning'><%= l.title %></p>
+    <% end %>
+  </div>
+  <hr class="my-4">
   <div>
     <%= link_to '詳細', task_path(@task.id) %>
     <%= link_to '編集', edit_task_path(@task.id) %>
