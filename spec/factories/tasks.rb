@@ -12,4 +12,10 @@ FactoryBot.define do
     detail {'second_detail'}
     user { User.first }
   end
+
+  factory :task_with_user, class: Task do
+    title {'with_user'}
+    detail {'foo'}
+    user
+  end
 end

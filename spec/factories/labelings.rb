@@ -3,4 +3,5 @@ FactoryBot.define do
     task { nil }
     label { nil }
   end
+
 end
