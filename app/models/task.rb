@@ -1,5 +1,7 @@
 class Task < ApplicationRecord
   belongs_to :user
+  has_many :labelings
+  has_many :tasks, through: :labelings
   validates :title, presence: true
   validates :detail, presence: true, length: {maximum: 255 }
   enum priority: [:high, :middle, :low]

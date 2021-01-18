@@ -13,7 +13,6 @@ class User < ApplicationRecord
   end
   def ensure_admin
     if User.where(admin: true).size == 1
-      self.admin = true
       errors.add(:base, "don't edit/destoy")
       throw(:abort)
     end
