@@ -3,10 +3,17 @@ class TasksController < ApplicationController
   before_action :tasks_logged_in?
   before_action :set_task, only: [:show, :edit, :update, :destroy]
   before_action :edit_task?, only: [:show, :edit, :update, :destroy]
+
   def index
     user_tasks = @current_user.tasks
     @order = "ASC"
     @tasks = user_tasks.order(created_at: 'DESC')
+    if pr = params[:labeL_search]
+      @tasks = Label.find(pr[:label_id]).tasks
+    end
+    # if params[:labeL_search]
+    #   @tasks = Label.find(params[:labeL_search][:label_id]).tasks
+    # end
     if params[:sort_expired]
       asc_desc_sort(user_tasks)
     elsif params[:sort_priority]

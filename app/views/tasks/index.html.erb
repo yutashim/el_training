@@ -8,6 +8,13 @@
   <%= form.submit '検索する', class:'ml-3' %>
 <% end %>
 
+<%= form_for(:labeL_search, local: true, url: tasks_path, method: :get) do |form| %>
+  <%= form.label :label_id, 'ラベル名:', class:'m-2 ml-5'%>
+  <%= form.select :label_id,
+  Label.all.collect {|l| [l.title, l.id]}, include_blank: true %>
+  <%= form.submit 'ラベル名で検索', class:'ml-3'%>
+<% end %>
+
 <table class="table container my-3 mx-4">
   <thead>
     <tr>
