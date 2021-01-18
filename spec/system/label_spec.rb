@@ -17,7 +17,7 @@ RSpec.describe 'ラベル機能のテスト', type: :system do
       visit edit_task_path(@task.id)
       check 'ラベル2'
       click_on '更新する'
-      visit edit_task_path(@task.id)
+      visit task_path(@task.id)
       expect(page).to have_content('ラベル2')
     end
     before do
