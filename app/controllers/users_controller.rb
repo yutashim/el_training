@@ -1,12 +1,10 @@
 class UsersController < ApplicationController
-  before_action :users_logged_in?, except: [:new, :create,]
-  before_action :set_user, only: [:edit, :update, :show, :destroy]
-  before_action :edit_user?, only: [:edit, :show]
+  before_action :users_logged_in?, except: %i[new create]
+  before_action :set_user, only: %i[edit update show destroy]
+  before_action :edit_user?, only: %i[edit show]
 
   def new
-    if logged_in? && @current_user.admin != true
-      redirect_to user_path(@current_user.id)
-    end
+    redirect_to user_path(@current_user.id) if logged_in? && @current_user.admin != true
     @user = User.new
   end
 
@@ -21,8 +19,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @user.update(user_params)
@@ -48,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end
