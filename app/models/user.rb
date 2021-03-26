@@ -7,6 +7,8 @@ class User < ApplicationRecord
   private
   def edt?
     User.find(self.id).admin
+    #下記の方法だと、更新しようとしている値を参照する
+    # self.admin
   end
   def dst?
     self.admin
